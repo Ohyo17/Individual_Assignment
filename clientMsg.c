@@ -9,7 +9,6 @@ int main(int argc , char *argv[])
 {
 	int socket_desc,new_socket,c;
 	struct sockaddr_in server; 
-        char *message;
 	char clientMsg[20000],buff[20000];
 	
 	//Create socket
@@ -33,25 +32,18 @@ int main(int argc , char *argv[])
 	puts("Connected \n");
 
 	//Message with SERVER
-	printf("******Welcome to application chat with SERVER*******\n\n");
+	printf("******Send Message Protocol to  SERVER*******\n\n");
 	
-	printf("!!! Press CTRL + Z if you want to exit the application !!!\n\n");
 	printf("CLIENT :");
 	fgets(clientMsg,20000,stdin);
 	send(socket_desc,clientMsg,20000,0);
 
-	if( send(socket_desc , message , strlen(message) , 0) < 0)
+	if( send(socket_desc ,clientMsg , strlen(clientMsg) , 0) < 0)
 	{
 		puts("Send failed");
 		return 1;
 	}
-	puts("Data Send\n");
-
-        //If fail to receive reply from SERVER
-	if( recv(socket_desc, buff, 2000 , 0) < 0)
-	{
-		puts("recv failed");
-	}
+	puts("****Message has been sent !!!!!****");
 	close(socket_desc);
 	return 0;
 }
